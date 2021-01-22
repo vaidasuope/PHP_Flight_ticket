@@ -10,33 +10,12 @@
 <body>
 <div class="container">
 
-    <?php $validation = []; ?>
-
-    <?php if (isset($_POST['send'])): ?>
-        <?php
-
-        if (!preg_match('/^[A-Za-zŠšĖėŽž]{1,100}$/', $_POST['vardas'])) {
-            $validation[] = "Netesingai įvestas/per ilgas vardas.";
-        }
-        if (!preg_match('/^[A-Za-zŠšĖėŽž]{1,100}$/', $_POST['pavardė'])) {
-            $validation[] = "Netesingai įvesta/per ilga pavardė.";
-        }
-        if (!preg_match('/^(\+3706)([0-9])/', $_POST['telefonas'])) {
-            $validation[] = "Telefono numeris neatitinka formato";
-        }
-        if (!preg_match('/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/', $_POST['paštas'])) {
-            $validation[] = "El. paštas neatitinka formato.";
-        }
-        if (!preg_match('/^\d{1,4}+(:?[.]\d{1,2})$/', $_POST['kaina'])) {
-            $validation[] = 'Kaina neatitinka formato. Rašykite su "."';
-        }
-        if (!preg_match('/^[A-Za-z0-9,.]{0,500}$/', $_POST['pastabos'])) {
-            $validation[] = "Žinutė per ilga (iki 500 simbolių)!";
-        }
-        ?>
+    <?php if (isset($_POST['print'])): ?>
+        <?php validate();?>
     <?php endif; ?>
 
-    <?php if (isset($_POST['send']) && empty($validation)): ?>
+    <?php if (isset($_POST['print']) && empty($validation)): ?>
+    <?php readData();?>
         <div class="table-bordered container mt-5">
             <div class="row bg-light mb-2 justify-content-center">
                 <h3>Your Flight Ticket</h3>
@@ -85,7 +64,30 @@
             </div>
         </div>
 
-
+    <?php elseif (isset($_POST['send'])): ?>
+<div>
+    <h1 class="mb-5 mt-2 bg-light text-center">Skrydžių rezervacijos</h1>
+        <table class='table table-hover'>
+            <thead class="thead-dark text-center align-items-center">
+            <tr>
+                <th>Skrydžio nr.</th>
+                <th>Asmens kodas</th>
+                <th class="align-items-center">Vardas</th>
+                <th>Pavardė</th>
+                <th>Telefono nr.</th>
+                <th>El. paštas</th>
+                <th>Išvykimas</th>
+                <th>Atvykimas</th>
+                <th>Bagažas</th>
+                <th>Kaina</th>
+                <th>Pastabos</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php printTable();?>
+            </tbody>
+        </table>
+</div>
     <?php else: ?>
 
         <?php foreach ($validation as $errors): ?>
@@ -96,7 +98,8 @@
 
         <form method="post" class="mb-5">
             <h1 class="mb-5 mt-3 bg-light text-center">Jūsų skrydžio informacija</h1>
-            <div class="form-group">
+            <div class="row">
+            <div class="form-group col-6">
                 <label for="name">Skrydžio numeris:</label>
                 <select class="form-control" name="skrydis" id="flight" aria-label="fault select example" name>
                     <option selected>Pasirinkite skrydžio numerį</option>
@@ -105,27 +108,33 @@
                     <?php endfor; ?>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group col">
                 <label for="lastname">Asmens kodas:</label>
                 <input type="text" name="kodas" id="code" class="form-control">
             </div>
-            <div class="form-group">
+            </div>
+            <div class="row">
+            <div class="form-group col-6">
                 <label for="email">Vardas:</label>
                 <input type="text" name="vardas" id="name" class="form-control">
             </div>
-            <div class="form-group">
+            <div class="form-group col">
                 <label for="message">Pavardė:</label>
                 <input type="text" name="pavardė" id="lastname" class="form-control">
             </div>
-            <div class="form-group">
+            </div>
+            <div class="row">
+            <div class="form-group col-6">
                 <label for="message">Telefono numeris:</label>
                 <input type="text" name="telefonas" id="phone" class="form-control">
             </div>
-            <div class="form-group">
+            <div class="form-group col">
                 <label for="message">El. paštas:</label>
                 <input type="text" name="paštas" id="email" class="form-control">
             </div>
-            <div class="form-group">
+            </div>
+            <div class="row">
+            <div class="form-group col-6">
                 <label for="message">Išvykimas:</label>
                 <select class="form-control" name="išvykimas" id="departure" aria-label="fault select example" name>
                     <option selected>Pasirinkite oro uostą</option>
@@ -134,7 +143,7 @@
                     <?php endfor; ?>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group col">
                 <label for="message">Atvykimas:</label>
                 <select class="form-control" name="atvykimas" id="arrival" aria-label="fault select example" name>
                     <option selected>Pasirinkite oro uostą</option>
@@ -143,7 +152,9 @@
                     <?php endfor; ?>
                 </select>
             </div>
-            <div class="form-group">
+            </div>
+            <div class="row">
+            <div class="form-group col-6">
                 <label for="message">Bagažas (kg):</label>
                 <select class="form-control" name="bagažas" id="baggage" aria-label="fault select example" name>
                     <option selected>Pasirinkite bagažo svorį</option>
@@ -153,15 +164,19 @@
                     <?php endfor; ?>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group col">
                 <label for="message">Kaina:</label>
                 <input type="text" name="kaina" id="price" class="form-control">
+            </div>
             </div>
             <div class="form-group">
                 <label for="message">Pastabos:</label>
                 <input type="text" name="pastabos" id="comments" class="form-control">
             </div>
-            <button type="submit" name="send" id="send" class="mt-3 btn btn-primary btn-lg text-center">Spausdinti</button>
+            <div class="form-group d-flex justify-content-center">
+            <button type="submit" name="print" id="print" class="mt-3 mr-3 btn btn-primary btn-lg text-center">Spausdinti bilietą</button>
+            <button type="submit" name="send" id="send" class="mt-3 btn btn-dark btn-lg text-center">Skrydžių rezervacijos</button>
+            </div>
         </form>
     <?php endif; ?>
 
