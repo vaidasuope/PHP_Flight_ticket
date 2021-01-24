@@ -14,6 +14,86 @@
         <?php validate();?>
     <?php endif; ?>
 
+    <?php if (isset($_POST['send'])): ?>
+    <div class="container">
+        <h1 class="mb-5 mt-2 bg-light text-center">Skrydžių rezervacijos</h1>
+
+        <form method="post">
+            <div class="row mb-3">
+                <h4 class="col-4 bg-light">Filtruoti pagal skrydžio numerį:</h4>
+                <select class="col-5 form-control" name="numeris" id="number" aria-label="fault select example">
+                    <option class="selected">Pasirinkite skrydžio numerį</option>
+                    <?php option(); ?>>
+                </select>
+                <button type="submit" name="search" id="search" class="btn btn-dark">Ieškoti</button>
+            </div>
+        </form>
+
+        <div class="row">
+            <table class="table table-hover">
+                <thead class="thead-dark text-center align-items-center">
+                <tr>
+                    <th>Skrydžio nr.</th>
+                    <th>Asmens kodas</th>
+                    <th class="align-items-center">Vardas</th>
+                    <th>Pavardė</th>
+                    <th>Telefono nr.</th>
+                    <th>El. paštas</th>
+                    <th>Išvykimas</th>
+                    <th>Atvykimas</th>
+                    <th>Bagažas</th>
+                    <th>Kaina</th>
+                    <th>Pastabos</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php printTable();?>
+                </tbody>
+            </table>
+        </div>
+        <?php die();?>
+        <?php endif;?>
+
+        <?php if (isset($_POST['search'])): ?>
+        <div class="container">
+            <h1 class="mb-5 mt-2 bg-light text-center">Skrydžių rezervacijos</h1>
+
+            <form method="post">
+                <div class="row mb-3">
+                    <h4 class="col-4 bg-light">Filtruoti pagal skrydžio numerį:</h4>
+                    <select class="col-5 form-control" name="numeris" id="number" aria-label="fault select example">
+                        <option class="selected">Pasirinkite skrydžio numerį</option>
+                        <?php option(); ?>>
+                    </select>
+                    <button type="submit" name="search" id="search" class="btn btn-dark">Ieškoti</button>
+                </div>
+            </form>
+
+            <div class="row">
+                <table class="table table-hover">
+                    <thead class="thead-dark text-center align-items-center">
+                    <tr>
+                        <th>Skrydžio nr.</th>
+                        <th>Asmens kodas</th>
+                        <th class="align-items-center">Vardas</th>
+                        <th>Pavardė</th>
+                        <th>Telefono nr.</th>
+                        <th>El. paštas</th>
+                        <th>Išvykimas</th>
+                        <th>Atvykimas</th>
+                        <th>Bagažas</th>
+                        <th>Kaina</th>
+                        <th>Pastabos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php filter();?>
+                    </tbody>
+                </table>
+            </div>
+            <?php die();?>
+            <?php endif;?>
+
     <?php if (isset($_POST['print']) && empty($validation)): ?>
     <?php readData();?>
         <div class="table-bordered container mt-5">
@@ -64,30 +144,7 @@
             </div>
         </div>
 
-    <?php elseif (isset($_POST['send'])): ?>
-<div>
-    <h1 class="mb-5 mt-2 bg-light text-center">Skrydžių rezervacijos</h1>
-        <table class='table table-hover'>
-            <thead class="thead-dark text-center align-items-center">
-            <tr>
-                <th>Skrydžio nr.</th>
-                <th>Asmens kodas</th>
-                <th class="align-items-center">Vardas</th>
-                <th>Pavardė</th>
-                <th>Telefono nr.</th>
-                <th>El. paštas</th>
-                <th>Išvykimas</th>
-                <th>Atvykimas</th>
-                <th>Bagažas</th>
-                <th>Kaina</th>
-                <th>Pastabos</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php printTable();?>
-            </tbody>
-        </table>
-</div>
+
     <?php else: ?>
 
         <?php foreach ($validation as $errors): ?>
@@ -192,5 +249,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
 </body>
 </html>

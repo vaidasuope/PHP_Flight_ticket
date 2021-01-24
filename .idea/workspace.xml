@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="447051bc-e47e-4a3a-aa2e-72db35d63e8d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/flights.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/flights.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/index.view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +28,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -39,7 +41,9 @@
       <updated>1611034069994</updated>
       <workItem from="1611034071015" duration="14665000" />
       <workItem from="1611049809347" duration="77000" />
-      <workItem from="1611308300875" duration="4816000" />
+      <workItem from="1611308300875" duration="5932000" />
+      <workItem from="1611476672573" duration="13233000" />
+      <workItem from="1611492278097" duration="3919000" />
     </task>
     <servers />
   </component>
