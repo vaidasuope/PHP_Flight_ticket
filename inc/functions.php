@@ -1,8 +1,9 @@
 <?php
 
-$validation=[];
+$validation = [];
 
-function validate (){
+function validate()
+{
 
     global $validation;
     if (!preg_match('/^[A-Za-zŠšĖėŽž]{1,100}$/', $_POST['vardas'])) {
@@ -25,15 +26,17 @@ function validate (){
     }
 }
 
-function readData (){
-        $data = 'data/flights.txt';
-        $content = file_get_contents($data);
-        $formData = implode(',', $_POST);
-        $content .= $formData . "/n";
-        file_put_contents($data, $content);
+function readData()
+{
+    $data = 'data/flights.txt';
+    $content = file_get_contents($data);
+    $formData = implode(',', $_POST);
+    $content .= $formData . "/n";
+    file_put_contents($data, $content);
 }
 
-function printTable (){
+function printTable()
+{
 
     $messages = file_get_contents('data/flights.txt', true);
     $messages = explode('/n', $messages);
@@ -62,23 +65,28 @@ function printTable (){
 //    }
 //}
 
-function filter () {
+function filter()
+{
     $messages = file_get_contents('data/flights.txt', true);
     $messages = explode('/n', $messages);
 
-        foreach ($messages as $message) {
-            echo "<tr></tr>";
-            $messageAfter = explode(',', $message);
-            foreach ($messageAfter as $value) {
-                if ($value != $_POST ['search'] && $_POST['numeris'] == $messageAfter[0]) {
-                    echo "<td>$value</td>";
-                } elseif ($value != $_POST ['search'] && $_POST['numeris'] == "Pasirinkite skrydžio numerį") {
-                    echo "<td>$value</td>";
-                }
-//                else {
-//                    echo '<script>alert("Toks skrydis dar neužregistruotas!")</script>';
-//                }
+    $all = true;
+    foreach ($messages as $message) {
+        echo "<tr></tr>";
+        $messageAfter = explode(',', $message);
+        foreach ($messageAfter as $value) {
+            if ($value != $_POST ['search'] && $_POST['numeris'] == $messageAfter[0]) {
+                echo "<td>$value</td>";
+                $all = false;
+            } elseif ($value != $_POST ['search'] && $_POST['numeris'] == "Pasirinkite skrydžio numerį") {
+                echo "<td>$value</td>";
+                $all = false;
             }
         }
+    }
+    if ($all) {
+        echo '<script>alert("Toks skrydis dar neužregistruotas!")</script>';
+    }
+
 }
 
