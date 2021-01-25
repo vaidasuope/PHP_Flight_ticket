@@ -49,33 +49,36 @@ function printTable (){
     }
 }
 
-function option (){
-    $messages = file_get_contents('data/flights.txt', true);
-    $messages = explode('/n', $messages);
-
-    foreach ($messages as $message) {
-        echo "<tr></tr>";
-        $messageAfter = explode(',', $message);
-        if ($message != $_POST ['send']) {
-            echo "<option>$messageAfter[0]</option>";
-        }
-    }
-}
+//function option (){
+//    $messages = file_get_contents('data/flights.txt', true);
+//    $messages = explode('/n', $messages);
+//
+//    foreach ($messages as $message) {
+//        echo "<tr></tr>";
+//        $messageAfter = explode(',', $message);
+//        if ($message != $_POST ['send']) {
+//            echo "<option>$messageAfter[0]</option>";
+//        }
+//    }
+//}
 
 function filter () {
     $messages = file_get_contents('data/flights.txt', true);
     $messages = explode('/n', $messages);
 
-    foreach ($messages as $message) {
-        echo "<tr></tr>";
-        $messageAfter = explode(',', $message);
-        foreach ($messageAfter as $value) {
-            if ($value != $_POST ['search'] && $_POST['numeris'] == $messageAfter[0]) {
-                echo "<td>$value</td>";
-            }elseif ($value != $_POST ['search'] && $_POST['numeris'] == "Pasirinkite skrydžio numerį"){
-                echo "<td>$value</td>";
+        foreach ($messages as $message) {
+            echo "<tr></tr>";
+            $messageAfter = explode(',', $message);
+            foreach ($messageAfter as $value) {
+                if ($value != $_POST ['search'] && $_POST['numeris'] == $messageAfter[0]) {
+                    echo "<td>$value</td>";
+                } elseif ($value != $_POST ['search'] && $_POST['numeris'] == "Pasirinkite skrydžio numerį") {
+                    echo "<td>$value</td>";
+                }
+//                else {
+//                    echo '<script>alert("Toks skrydis dar neužregistruotas!")</script>';
+//                }
             }
         }
-    }
 }
 

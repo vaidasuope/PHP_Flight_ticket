@@ -23,7 +23,9 @@
                 <h4 class="col-4 bg-light">Filtruoti pagal skrydžio numerį:</h4>
                 <select class="col-5 form-control" name="numeris" id="number" aria-label="fault select example">
                     <option class="selected">Pasirinkite skrydžio numerį</option>
-                    <?php option(); ?>>
+                    <?php foreach ($flights as $flight): ?>
+                        <option value="<?= $flight; ?>"><?= $flight; ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <button type="submit" name="search" id="search" class="btn btn-dark">Ieškoti</button>
             </div>
@@ -63,7 +65,9 @@
                     <h4 class="col-4 bg-light">Filtruoti pagal skrydžio numerį:</h4>
                     <select class="col-5 form-control" name="numeris" id="number" aria-label="fault select example">
                         <option class="selected">Pasirinkite skrydžio numerį</option>
-                        <?php option(); ?>>
+                        <?php foreach ($flights as $flight): ?>
+                            <option value="<?= $flight; ?>"><?= $flight; ?></option>
+                        <?php endforeach; ?>
                     </select>
                     <button type="submit" name="search" id="search" class="btn btn-dark">Ieškoti</button>
                 </div>
