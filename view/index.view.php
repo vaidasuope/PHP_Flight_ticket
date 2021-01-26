@@ -117,8 +117,7 @@
                     </div>
                     <div class="row mt-5">
                         <div class="col-4">
-                            <img src="https://www.flaticon.com/svg/vstatic/svg/2979/2979504.svg?token=exp=1611048417~hmac=e92148b8948bdf3f532c16668f3526cb"
-                                 height="100px" width="100px">
+                            <img src="view/img/plane.png" height="100px" width="100px" alt="plane img">
                         </div>
                         <div class="col">
                             <div class="row">
